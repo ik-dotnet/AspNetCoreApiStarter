@@ -1,0 +1,55 @@
+﻿version: '0.0.{build}'
+
+image: Visual Studio 2017
+
+init:
+  # Good practise, because Windows line endings are different from Unix/Linux ones
+  - cmd: git config --global core.autocrlf true
+
+clone_depth: 1
+
+pull_requests:  
+  do_not_increment_build_number: true
+
+branches:  
+  only:
+  - master
+
+nuget:  
+  disable_publish_on_pr: true
+
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+
+install:
+  # Install repo specific stuff here
+
+before_build:
+  # Display .NET Core version
+  - cmd: dotnet --version
+
+build_script:
+  - cmd: dotnet publish ./CodeStreamAspNetCoreApiStarter.csproj -c Release -f netcoreapp2.0
+
+test: off  
+
+artifacts:
+ - path: '\bin\Release\netcoreapp2.0\publish'
+   name: WebSite
+
+deploy:
+- provider: WebDeploy
+  server: https://<YOUR_AZURE_WEBSITE_GOES_HERE>.scm.azurewebsites.net:443/msdeploy.axd?site=<YOUR_AZURE_WEBSITE_GOES_HERE>
+  website: <YOUR_AZURE_WEBSITE_GOES_HERE>
+  username: $<YOUR_AZURE_WEBSITE_GOES_HERE>
+  password:
+    secure: LIrhBt947e+z+oBUUDBBGLScr+wQHmjJbA8DDiFPJE+hZeIEnIqrtI9O58AROsTBMP7YQVbSrMRbkhwdDewEuA==
+  remove_files: true
+  app_offline: true
+  artifact: WebSite
