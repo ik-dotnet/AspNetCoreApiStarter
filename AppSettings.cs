@@ -12,5 +12,6 @@ namespace CodeStresmAspNetCoreApiStarter
         }
 
         public string PrimaryConnectionString => config.GetValue<string>("ConnectionStrings:Primary");
+        public string CorsAllowedOrigins => config.GetValue<string>("Cors:AllowedOrigins");
     }
 }
