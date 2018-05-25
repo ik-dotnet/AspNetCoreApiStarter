@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
 using SimpleInjector.Lifestyles;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CodeStresmAspNetCoreApiStarter
 {
@@ -40,6 +41,11 @@ namespace CodeStresmAspNetCoreApiStarter
 
             IntegrateSimpleInjector(services);
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "CodeStream API", Version = "v1" });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +62,16 @@ namespace CodeStresmAspNetCoreApiStarter
             app.UseCors(builder => builder.WithOrigins("http://localhost:8100")
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CodeStream API V1");
+            });
 
             app.UseMvc();
         }
