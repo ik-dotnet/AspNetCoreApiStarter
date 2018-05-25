@@ -11,6 +11,8 @@ Built on top of ASP.NET Core 2.0
 * Dapper
 * EntityFramework Core
 * Swashbuckle (swagger / OpenApi)
+* CI on AppVeyor (appveyor.yml)
+* deployment to azure web app (via appveyoy.yml)
 
 ## Getting started
 
