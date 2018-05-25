@@ -5,14 +5,16 @@ Built on top of ASP.NET Core 2.0
 
 ## Frameworks used:
 
-* MediatR
-* SimpleInjector
-* AutoMapper
-* Dapper
-* EntityFramework Core
-* Swashbuckle (swagger / OpenApi)
-* CI on AppVeyor (appveyor.yml)
-* deployment to azure web app (via appveyoy.yml)
+* [MediatR](https://github.com/jbogard/MediatR)
+* [CodeStream.Mediatr](https://www.nuget.org/packages/CodeStream.MediatR/)
+* [SimpleInjector](https://simpleinjector.org)
+* [AutoMapper](https://automapper.org/)
+* [Dapper](https://github.com/StackExchange/Dapper)
+* [EntityFramework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/)
+* [NExtensions](https://github.com/halcharger/NExtensions)
+* [Swashbuckle (swagger / OpenApi)](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+* CI on [AppVeyor](appveyor.com) ([appveyor.yml](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/appveyor.yml))
+* deployment to azure web app (via [appveyoy.yml](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/appveyor.yml))
 
 ## Getting started
 
