@@ -104,20 +104,10 @@ namespace CodeStresmAspNetCoreApiStarter
 
         private void InitializeContainer(IApplicationBuilder app)
         {
-            // Add application services. For instance:
-            container.RegisterSingleton<AppSettings>();
-            container.Register<DapperContext>(Lifestyle.Scoped);
-
-            container.Collection.Register(typeof(IPipelineBehavior<,>), new[]
-            {
-                typeof(ErrorHandlerMediatrPipeline<,>),
-                typeof(LogDNAMediatrPipeline<,>)
-            });
+            container.RegisterPackages(AppDomain.CurrentDomain.GetAssemblies());
 
             // Allow Simple Injector to resolve services from ASP.NET Core.
             container.AutoCrossWireAspNetComponents(app);
-
-            container.RegisterPackages(AppDomain.CurrentDomain.GetAssemblies());
 
             RegisterLogDNAServicesInSimpleInjector(container);
         }

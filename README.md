@@ -1,7 +1,7 @@
 # CodeStream AspNetCoreApiStarter
 This is a starter project for building an ASP.NET Core WebApi project according to CodeStream opinions, tools and frameworks.
 
-Built on top of ASP.NET Core 2.1 RC1 (as of 25 May 2018)
+Built on top of ASP.NET Core 2.1.2 (as of 23 Jul 2018)
 
 ## Frameworks used:
 
@@ -13,6 +13,7 @@ Built on top of ASP.NET Core 2.1 RC1 (as of 25 May 2018)
 * [EntityFramework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/)
 * [NExtensions](https://github.com/halcharger/NExtensions)
 * [Swashbuckle (swagger / OpenApi)](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+* [RedBear.LogDNA](https://github.com/RedBearSys/RedBear.LogDNA)
 * CI on [AppVeyor](appveyor.com) ([appveyor.yml](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/appveyor.yml))
 * deployment to azure web app (via [appveyoy.yml](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/appveyor.yml))
 
@@ -21,7 +22,7 @@ Built on top of ASP.NET Core 2.1 RC1 (as of 25 May 2018)
 * Clone (`git clone https://github.com/codestreamsystems/AspNetCoreApiStarter.git`)
 * Open in Visual Studio (Code)
 * Build (`dotnet build`)
-* Run (`dotnet run`) and navigate to https://localhost:44393/swagger to inspect swagger documentation.
+* Run (`dotnet run`) and navigate to https://localhost:5001/swagger to inspect swagger documentation.
 
 The app is hosted on https://localhost:5001 when launched from the command line using `dotnet run` (using Kestrel) and hosted on https://localhost:44393 when launched from Visual Studio (using IIS Express).
 
@@ -31,3 +32,19 @@ The app is hosted on https://localhost:5001 when launched from the command line 
 * Run through `Getting Started` steps listed above
 * Find and Replace `CodeStreamAspNetCoreApiStart` with `Your Shiny New Project Name` throughout all files in root project directory.
 * Build and Run to ensure no errors.
+* Update the `LogDNA` section of `appsettings.json` with the new relevant values.
+* Update `appveyor.yml` with relevant Azure publish profile settings of Azure app service you wish to deploy to.
+
+## LogDNA configuration and usage
+
+* For configuration see [Startup.cs line 125](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Startup.cs#L125)
+* For usage see [LogDNAMediatrPipeline.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
+
+## MediatR Pipeline configuration and implementation
+
+* For configuration see [AppSimpleInjectorPackage.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AppSimpleInjectorPackage.cs)
+* For implementation see [ErrorHandlerMediatrPipeline.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/ErrorHandlerMediatrPipeline.cs) and [LogDNAMediatrPipeline.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
+
+## AutoMapper configuration
+
+* For configuration see [AutoMapperProfile.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AutoMapperProfile.cs)
