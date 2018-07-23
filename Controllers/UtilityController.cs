@@ -1,16 +1,24 @@
-﻿using System.Reflection;
+﻿using System.Threading.Tasks;
+using CodeStresmAspNetCoreApiStarter.Queries;
+using CodeStresmAspNetCoreApiStarter.ViewModels;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeStresmAspNetCoreApiStarter.Controllers
 {
     public class UtilityController
     {
-        [HttpGet]
-        [Route("api/version")]
-        public object GetVersion()
+        private readonly IMediator mediatr;
+
+        public UtilityController(IMediator mediatr)
         {
-            var version = typeof(Program).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
-            return new { version };
+            this.mediatr = mediatr;
+        }
+
+        [HttpGet("version")]
+        public async Task<ActionResult<VersionViewModel>> GetVersion()
+        {
+            return new ActionResult<VersionViewModel>(await mediatr.Send(new VersionQuery()));
         }
 
     }
