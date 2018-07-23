@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CodeStresmAspNetCoreApiStarter.Controllers
 {
+    [ApiController]
     public class UtilityController
     {
         private readonly IMediator mediatr;

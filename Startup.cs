@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using System;
+using System.Reflection;
+using CodeStream.logDNA;
 using CodeStresmAspNetCoreApiStarter.Data;
+using CodeStresmAspNetCoreApiStarter.Infrastructure.MediatR;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RedBear.LogDNA;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
 using SimpleInjector.Lifestyles;
@@ -104,11 +108,41 @@ namespace CodeStresmAspNetCoreApiStarter
             container.RegisterSingleton<AppSettings>();
             container.Register<DapperContext>(Lifestyle.Scoped);
 
+            container.Collection.Register(typeof(IPipelineBehavior<,>), new[]
+            {
+                typeof(ErrorHandlerMediatrPipeline<,>),
+                typeof(LogDNAMediatrPipeline<,>)
+            });
+
             // Allow Simple Injector to resolve services from ASP.NET Core.
             container.AutoCrossWireAspNetComponents(app);
 
             container.RegisterPackages(AppDomain.CurrentDomain.GetAssemblies());
+
+            RegisterLogDNAServicesInSimpleInjector(container);
         }
+
+        public void RegisterLogDNAServicesInSimpleInjector(Container container)
+        {
+            //TODO: extract this code into SimpleInjector IPackage class but then we need to solve global static access to AppSettings.
+
+            container.RegisterSingleton(() =>
+            {
+                var config = new ConfigurationManager(AppSettings.LogDNAInjestionKey)
+                {
+                    HostName = AppSettings.LogDNAHostname,
+                    FlushInterval = 500,
+                    Tags = new[] { AppSettings.Environment, Assembly.GetExecutingAssembly().GetName().Version.ToString() }
+                };
+                var client = config.Initialise();
+
+                client.Connect();
+
+                return client;
+            });
+            container.RegisterSingleton(() => (ILogDNALogger)new LogDNALogger(container.GetInstance<IApiClient>(), AppSettings.LogDNAApp));
+        }
+
 
     }
 }
