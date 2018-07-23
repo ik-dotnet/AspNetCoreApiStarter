@@ -35,21 +35,21 @@ before_build:
   - cmd: dotnet --version
 
 build_script:
-  - cmd: dotnet publish ./CodeStreamAspNetCoreApiStarter.csproj -c Release -f netcoreapp2.0
+  - cmd: dotnet publish ./CodeStreamAspNetCoreApiStarter.csproj -c Release -f netcoreapp2.1
 
 test: off  
 
 artifacts:
- - path: '\bin\Release\netcoreapp2.0\publish'
+ - path: '\bin\Release\netcoreapp2.1\publish'
    name: WebSite
 
 deploy:
 - provider: WebDeploy
-  server: https://<YOUR_AZURE_WEBSITE_GOES_HERE>.scm.azurewebsites.net:443/msdeploy.axd?site=<YOUR_AZURE_WEBSITE_GOES_HERE>
-  website: <YOUR_AZURE_WEBSITE_GOES_HERE>
-  username: $<YOUR_AZURE_WEBSITE_GOES_HERE>
+  server: https://CodeStreamAspNetCoreApiStarter.scm.azurewebsites.net:443/msdeploy.axd?site=CodeStreamAspNetCoreApiStarter
+  website: CodeStreamAspNetCoreApiStarter
+  username: $CodeStreamAspNetCoreApiStarter
   password:
-    secure: LIrhBt947e+z+oBUUDBBGLScr+wQHmjJbA8DDiFPJE+hZeIEnIqrtI9O58AROsTBMP7YQVbSrMRbkhwdDewEuA==
+    secure: euBkKta2Lqk1xLtga+c1qn0vo34X2lAwTY2c2AwLbkdsquwBHmulsVwFLZ3TeLMEERZZh6DOZb5dgCvPnnbmSg==
   remove_files: true
   app_offline: true
   artifact: WebSite
