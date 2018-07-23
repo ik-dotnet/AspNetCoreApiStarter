@@ -1,6 +1,6 @@
 ﻿namespace CodeStresmAspNetCoreApiStarter.ViewModels
 {
-    public class VersionViewModel
+    public class AppVersionViewModel
     {
         public string Version { get; set; }
     }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CodeStresmAspNetCoreApiStarter.Queries
 {
-    public class VersionQuery : IRequest<VersionViewModel>
+    public class AppVersionQuery : IRequest<AppVersionViewModel>
     {
         
     }

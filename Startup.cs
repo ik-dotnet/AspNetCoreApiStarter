@@ -3,8 +3,6 @@ using System;
 using System.Reflection;
 using CodeStream.logDNA;
 using CodeStresmAspNetCoreApiStarter.Data;
-using CodeStresmAspNetCoreApiStarter.Infrastructure.MediatR;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -40,7 +38,6 @@ namespace CodeStresmAspNetCoreApiStarter
 
             services.AddCors();
             services.AddAutoMapper(thisAssembly);
-            services.AddMediatR(thisAssembly);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             AddSimpleInjector(services);

@@ -17,9 +17,9 @@ namespace CodeStresmAspNetCoreApiStarter.Controllers
         }
 
         [HttpGet("version")]
-        public async Task<ActionResult<VersionViewModel>> GetVersion()
+        public async Task<ActionResult<AppVersionViewModel>> GetVersion()
         {
-            return new ActionResult<VersionViewModel>(await mediatr.Send(new VersionQuery()));
+            return new ActionResult<AppVersionViewModel>(await mediatr.Send(new AppVersionQuery()));
         }
 
     }
