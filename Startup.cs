@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using CodeStresmAspNetCoreApiStarter.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,8 +32,11 @@ namespace CodeStresmAspNetCoreApiStarter
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var thisAssembly = GetType().Assembly;
+
             services.AddCors();
-            services.AddAutoMapper();
+            services.AddAutoMapper(thisAssembly);
+            services.AddMediatR(thisAssembly);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton(Configuration);

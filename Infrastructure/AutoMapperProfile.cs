@@ -6,7 +6,7 @@ namespace CodeStresmAspNetCoreApiStarter.Infrastructure
     {
         public AutoMapperProfile()
         {
-            
+            //Create your AUtoMapper mapping configuration here
         }
     }
 }
