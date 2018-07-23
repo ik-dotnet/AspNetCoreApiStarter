@@ -43,11 +43,7 @@ namespace CodeStresmAspNetCoreApiStarter
             services.AddMediatR(thisAssembly);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSingleton(Configuration);
-
-            services.AddDbContext<EFContext>(opts => opts.UseSqlServer(AppSettings.PrimaryConnectionString));
-
-            IntegrateSimpleInjector(services);
+            AddSimpleInjector(services);
 
             services.AddSwaggerGen(c =>
             {
@@ -59,8 +55,7 @@ namespace CodeStresmAspNetCoreApiStarter
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            InitializeContainer(app);
-            container.Verify();
+            UseSimpleInjector(app);
 
             if (env.IsDevelopment())
             {
@@ -90,19 +85,21 @@ namespace CodeStresmAspNetCoreApiStarter
             app.UseMvc();
         }
 
-        private void IntegrateSimpleInjector(IServiceCollection services)
+        private void AddSimpleInjector(IServiceCollection services)
         {
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
+            services.AddSingleton(Configuration);
+
+            services.AddDbContext<EFContext>(opts => opts.UseSqlServer(AppSettings.PrimaryConnectionString));
 
             services.EnableSimpleInjectorCrossWiring(container);
             services.UseSimpleInjectorAspNetRequestScoping(container);
         }
 
-        private void InitializeContainer(IApplicationBuilder app)
+        private void UseSimpleInjector(IApplicationBuilder app)
         {
             container.RegisterPackages(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -110,6 +107,8 @@ namespace CodeStresmAspNetCoreApiStarter
             container.AutoCrossWireAspNetComponents(app);
 
             RegisterLogDNAServicesInSimpleInjector(container);
+
+            container.Verify();
         }
 
         public void RegisterLogDNAServicesInSimpleInjector(Container container)
