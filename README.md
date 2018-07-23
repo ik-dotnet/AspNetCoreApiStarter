@@ -3,6 +3,8 @@ This is a starter project for building an ASP.NET Core WebApi project according 
 
 Built on top of ASP.NET Core 2.1.2 (as of 23 Jul 2018)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/1prnaf788kk4ytt1?svg=true)](https://ci.appveyor.com/project/AllenFirth-CodeStream/aspnetcoreapistarter)
+
 ## Frameworks used:
 
 * [MediatR](https://github.com/jbogard/MediatR)
