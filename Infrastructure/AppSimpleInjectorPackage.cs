@@ -10,12 +10,6 @@ namespace CodeStresmAspNetCoreApiStarter.Infrastructure
         {
             container.RegisterSingleton<AppSettings>();
             container.Register<DapperContext>(Lifestyle.Scoped);
-
-            //container.Collection.Register(typeof(IPipelineBehavior<,>), new[]
-            //{
-            //    typeof(ErrorHandlerMediatrPipeline<,>),
-            //    typeof(LogDNAMediatrPipeline<,>)
-            //});
         }
     }
 }
