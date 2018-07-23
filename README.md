@@ -39,7 +39,7 @@ The app is hosted on https://localhost:5001 when launched from the command line 
 
 ## LogDNA configuration and usage
 
-* For configuration see [Startup.cs line 125](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Startup.cs#L125)
+* For configuration see [Startup.cs (line 115)](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Startup.cs#L115)
 * For usage see [LogDNAMediatrPipeline.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
 
 ## MediatR Pipeline configuration and implementation
