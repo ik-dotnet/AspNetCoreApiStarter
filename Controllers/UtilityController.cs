@@ -16,13 +16,19 @@ namespace CodeStresmAspNetCoreApiStarter.Controllers
             this.mediatr = mediatr;
         }
 
+        /// <summary>
+        /// Get Application Version
+        /// </summary>
         [HttpGet("version")]
         public async Task<ActionResult<AppVersionViewModel>> GetVersion()
         {
             return new ActionResult<AppVersionViewModel>(await mediatr.Send(new AppVersionQuery()));
         }
 
-        [HttpGet("")] //default root url
+        /// <summary>
+        /// Get Heartbeat of the application (default application url)
+        /// </summary>
+        [HttpGet("")] 
         public async Task<ActionResult<HeartBeatViewModel>> GetHeartBeat()
         {
             return new ActionResult<HeartBeatViewModel>(await mediatr.Send(new HeartBeatQuery()));
