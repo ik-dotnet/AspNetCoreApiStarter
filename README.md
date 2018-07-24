@@ -56,3 +56,9 @@ The app is hosted on https://localhost:5001 when launched from the command line 
 * All `Command` and `Query` messages should inherit from [AppMessage](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AppMessage.cs)
 * All executions of `Commands` and `Queries` will be logged via [LogDNAMediatrPipeline](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
 * Execution time in milliseconds will also be logged against the `Command / Query`
+
+## `Command / Query` chaining and `CorrelationId`
+
+In complex applications there will be the need for one `Command / Query` to call another and so on creating a chain of messages (one calling the other). This results in multiple `Commands / Queries` being called all in the scope of a single Http Request. When viewing logs of these `Commands / Queries` is if often imperative to view all logs for all chained / linked messages. This can be done as long as all messages use the same `CorrelationId`. 
+
+An example of this can be seen in the [HeartBeatQueryHandler](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Queries/HeartBeatQueryHandler.cs) where the `HeartBeatQueryHandler executes the `AppVersionQuery`.
