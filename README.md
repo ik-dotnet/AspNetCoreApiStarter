@@ -50,3 +50,9 @@ The app is hosted on https://localhost:5001 when launched from the command line 
 ## AutoMapper configuration
 
 * For configuration see [AutoMapperProfile.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AutoMapperProfile.cs)
+
+## MediatR Pipeline logging with LogDNA
+
+* All `Command` and `Query` messages should inherit from [AppMessage](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AppMessage.cs)
+* All executions of `Commands` and `Queries` will be logged via [LogDNAMediatrPipeline](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
+* Execution time in milliseconds will also be logged against the `Command / Query`

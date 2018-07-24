@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using CodeStream.logDNA;
 using CodeStream.MediatR;
@@ -16,16 +17,23 @@ namespace CodeStresmAspNetCoreApiStarter.Infrastructure.MediatR
         }
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
+            var timer = new Stopwatch();
+            timer.Start();
+
             var result = await next();
-            Log(request, result);
+
+            timer.Stop();
+            Log(request, result, timer.ElapsedMilliseconds);
+
             return result;
         }
 
-        private void Log(TRequest req, TResponse res)
+        private void Log(TRequest req, TResponse res, long executionTimeInMilliseconds)
         {
             var obj = new LogDNAMeta<TRequest>(req)
             {
-                MessageSucceeded = true //default to true
+                MessageSucceeded = true, //default to true
+                ExecutionMilliseconds = executionTimeInMilliseconds
             };
 
             var result = res as Result;

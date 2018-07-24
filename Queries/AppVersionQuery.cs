@@ -1,9 +1,10 @@
-﻿using CodeStresmAspNetCoreApiStarter.ViewModels;
+﻿using CodeStresmAspNetCoreApiStarter.Infrastructure;
+using CodeStresmAspNetCoreApiStarter.ViewModels;
 using MediatR;
 
 namespace CodeStresmAspNetCoreApiStarter.Queries
 {
-    public class AppVersionQuery : IRequest<AppVersionViewModel>
+    public class AppVersionQuery : AppMessage, IRequest<AppVersionViewModel>
     {
         
     }
