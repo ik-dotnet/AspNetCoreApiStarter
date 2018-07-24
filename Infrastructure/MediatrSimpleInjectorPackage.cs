@@ -17,6 +17,7 @@ namespace CodeStresmAspNetCoreApiStarter.Infrastructure
             container.Collection.Register(typeof(INotificationHandler<>), assemblies);
             container.Collection.Register(typeof(IPipelineBehavior<,>), new[]
             {
+                typeof(ExecutionTimeLoggingMediatrPipeline<,>),
                 typeof(ErrorHandlerMediatrPipeline<,>),
                 typeof(LogDNAMediatrPipeline<,>)
             });
