@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CodeStresmAspNetCoreApiStarter.Infrastructure;
 using CodeStresmAspNetCoreApiStarter.Queries;
 using CodeStresmAspNetCoreApiStarter.ViewModels;
 using MediatR;
@@ -22,7 +23,7 @@ namespace CodeStresmAspNetCoreApiStarter.Controllers
         [HttpGet("version")]
         public async Task<ActionResult<AppVersionViewModel>> GetVersion()
         {
-            return new ActionResult<AppVersionViewModel>(await mediatr.Send(new AppVersionQuery()));
+            return (await mediatr.Send(new AppVersionQuery())).AsActionResult();
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace CodeStresmAspNetCoreApiStarter.Controllers
         [HttpGet("")] 
         public async Task<ActionResult<HeartBeatViewModel>> GetHeartBeat()
         {
-            return new ActionResult<HeartBeatViewModel>(await mediatr.Send(new HeartBeatQuery()));
+            return (await mediatr.Send(new HeartBeatQuery())).AsActionResult();
         }
 
     }
