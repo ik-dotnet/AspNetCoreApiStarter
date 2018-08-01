@@ -30,6 +30,7 @@ namespace CodeStresmAspNetCoreApiStarter.Infrastructure
 
                 var problemDetails = new ProblemDetails
                 {
+                    //TODO: fill in organization name below such as: $"urn:MYORGANIZATION:error:{correlationId}"
                     Instance = $"urn:error:{correlationId}"
                 };
 

@@ -40,20 +40,21 @@ The app is hosted on https://localhost:5001 when launched from the command line 
 * Build and Run to ensure no errors.
 * Update the `LogDNA` section of `appsettings.json` with the new relevant values.
 * Update `appveyor.yml` with relevant Azure publish profile settings of Azure app service you wish to deploy to.
+* Search for `TODO` comments that may instruct on specific replacements in code.
 
 ## LogDNA configuration and usage
 
 * For configuration see [RegisterLogDNAServicesInSimpleInjector method in Startup.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Startup.cs)
-* For usage see [LogDNAMediatrPipeline.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
+* For usage see [LogDNAMediatrPipeline](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
 
 ## MediatR Pipeline configuration and implementation
 
-* For configuration see [AppSimpleInjectorPackage.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AppSimpleInjectorPackage.cs)
-* For implementation see [ErrorHandlerMediatrPipeline.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/ErrorHandlerMediatrPipeline.cs) and [LogDNAMediatrPipeline.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
+* For configuration see [AppSimpleInjectorPackage](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AppSimpleInjectorPackage.cs)
+* For implementation see [ErrorHandlerMediatrPipeline](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/ErrorHandlerMediatrPipeline.cs) and [LogDNAMediatrPipeline.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/LogDNAMediatrPipeline.cs)
 
 ## AutoMapper configuration
 
-* For configuration see [AutoMapperProfile.cs](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AutoMapperProfile.cs)
+* For configuration see [AutoMapperProfile](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/AutoMapperProfile.cs)
 
 ## MediatR Pipeline logging with LogDNA
 
@@ -66,3 +67,9 @@ The app is hosted on https://localhost:5001 when launched from the command line 
 In complex applications there will be the need for one `Command / Query` to call another and so on creating a chain of messages (one calling the other). This results in multiple `Commands / Queries` being called all in the scope of a single Http Request. When viewing logs of these `Commands / Queries` is if often imperative to view all logs for all chained / linked messages. This can be done as long as all messages use the same `CorrelationId`. 
 
 An example of this can be seen in the [HeartBeatQueryHandler](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Queries/HeartBeatQueryHandler.cs) where the `HeartBeatQueryHandler` executes the `AppVersionQuery`.
+
+## Exception Handling & Logging
+
+Global exception handling and logging happens in [GlobalExceptionHandler](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/GlobalExceptionHandler.cs) and attempt to following [RFC7807](https://tools.ietf.org/html/rfc7807) as per [this](https://www.strathweb.com/2018/07/centralized-exception-handling-and-request-validation-in-asp-net-core) article.
+
+Pipeline level exception handling happens in [ErrorHandlerMediatrPipeline](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/Infrastructure/MediatR/ErrorHandlerMediatrPipeline.cs)
