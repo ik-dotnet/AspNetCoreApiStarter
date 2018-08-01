@@ -9,19 +9,19 @@ Built on top of ASP.NET Core 2.1.2 (as of 23 Jul 2018)
 
 https://codestreamaspnetcoreapistarter.azurewebsites.net/swagger
 
-## Frameworks used:
+## Direct references to Frameworks:
 
 * [MediatR](https://github.com/jbogard/MediatR)
-* [CodeStream.Mediatr](https://www.nuget.org/packages/CodeStream.MediatR/)
+* [CodeStream.Mediatr](https://www.nuget.org/packages/CodeStream.MediatR)
+* [CodeStream.LogDNA](https://www.nuget.org/packages/CodeStream.LogDNA)
 * [SimpleInjector](https://simpleinjector.org)
 * [AutoMapper](https://automapper.org/)
 * [Dapper](https://github.com/StackExchange/Dapper)
-* [EntityFramework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/)
+* [EntityFramework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)
 * [NExtensions](https://github.com/halcharger/NExtensions)
 * [Swashbuckle (swagger / OpenApi)](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
-* [RedBear.LogDNA](https://github.com/RedBearSys/RedBear.LogDNA)
 * CI on [AppVeyor](appveyor.com) ([appveyor.yml](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/appveyor.yml))
-* deployment to azure web app (via [appveyoy.yml](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/appveyor.yml))
+* deployment to azure web app (via [appveyor.yml](https://github.com/codestreamsystems/AspNetCoreApiStarter/blob/master/appveyor.yml))
 
 ## Getting started
 
