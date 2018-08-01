@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using CodeStresmAspNetCoreApiStarter.Infrastructure;
+﻿using System;
+using System.Threading.Tasks;
 using CodeStresmAspNetCoreApiStarter.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,21 +17,39 @@ namespace CodeStresmAspNetCoreApiStarter.Controllers
         }
 
         /// <summary>
-        /// Get Application Version
+        /// Get Heartbeat of the application (default application url)
         /// </summary>
-        [HttpGet("version")]
-        public async Task<ActionResult<AppVersion>> GetVersion()
+        [HttpGet("")]
+        public async Task<ActionResult<HeartBeatResult>> GetHeartBeat()
         {
-            return (await mediatr.Send(new AppVersion.Query())).AsActionResult();
+            return await mediatr.Send(new HeartbeatQuery());
         }
 
         /// <summary>
-        /// Get Heartbeat of the application (default application url)
+        /// Get Application Version
         /// </summary>
-        [HttpGet("")] 
-        public async Task<ActionResult<HeartBeat>> GetHeartBeat()
+        [HttpGet("version")]
+        public async Task<ActionResult<AppVersionResult>> GetVersion()
         {
-            return (await mediatr.Send(new HeartBeat.Query())).AsActionResult();
+            return await mediatr.Send(new AppVersionQuery());
+        }
+
+        /// <summary>
+        /// See how exception handling works
+        /// </summary>
+        [HttpGet("test-exception/{msg}")]
+        public async Task<ActionResult<HeartBeatResult>> TestException(string msg)
+        {
+            throw new Exception($"test exception: {msg}");
+        }
+
+        /// <summary>
+        /// See how exception handling works from within the mediatr pipeline
+        /// </summary>
+        [HttpGet("test-pipeline-exception/{msg}")]
+        public async Task<ActionResult<string>> TestPipelineException(string msg)
+        {
+            return await mediatr.Send(new TestExceptionQuery{Msg = msg});
         }
 
     }

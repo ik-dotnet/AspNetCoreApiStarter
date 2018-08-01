@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using CodeStream.logDNA;
 using CodeStresmAspNetCoreApiStarter.Data;
+using CodeStresmAspNetCoreApiStarter.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -85,6 +86,9 @@ namespace CodeStresmAspNetCoreApiStarter
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "CodeStream API V1");
             });
 
+            // global exception handler
+            app.UseExceptionHandler(GlobalExceptionHandler.Handler(container.GetInstance<ILogDNALogger>()));
+            
             app.UseMvc();
         }
 
