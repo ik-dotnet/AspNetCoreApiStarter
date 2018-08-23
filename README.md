@@ -34,13 +34,16 @@ The app is hosted on https://localhost:5001 when launched from the command line 
 
 ## To repurpose for new API projects
 
-* Fork this repo to your new project repo
+* Fork/Clone this repo to your new project repo
+    * If you clone you will need to remove the default origin remote and add your own new remote origin with the following commands:
+        * `git remote remove origin`
+        * `git remote add origin https://my.new.origin.url`
 * Run through `Getting Started` steps listed above
 * Find and Replace `CodeStreamAspNetCoreApiStarter` with `Your Shiny New Project Name` throughout all files in root project directory.
 * Rename the following files in the root directory accordingly:
     * CodeStreamAspNetCoreApiStarter.sln
     * CodeStreamAspNetCoreApiStarter.csproj
-* Build and Run to ensure no errors.
+* Build (`dotnet build`) and Run (`dotnet run`) to ensure no errors.
 * Update the `LogDNA` section of `appsettings.json` with the new relevant values.
 * Update `appveyor.yml` with relevant Azure publish profile settings of Azure app service you wish to deploy to.
 * Search for `TODO` comments that may instruct on specific replacements in code.
