@@ -16,6 +16,7 @@ https://codestreamaspnetcoreapistarter.azurewebsites.net/swagger
 * [CodeStream.LogDNA](https://www.nuget.org/packages/CodeStream.LogDNA)
 * [SimpleInjector](https://simpleinjector.org)
 * [AutoMapper](https://automapper.org/)
+* [FluentValidation](https://fluentvalidation.net/)
 * [Dapper](https://github.com/StackExchange/Dapper)
 * [EntityFramework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)
 * [NExtensions](https://github.com/halcharger/NExtensions)

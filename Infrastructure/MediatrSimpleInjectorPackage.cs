@@ -18,7 +18,8 @@ namespace CodeStresmAspNetCoreApiStarter.Infrastructure
             container.Collection.Register(typeof(IPipelineBehavior<,>), new[]
             {
                 typeof(ErrorHandlerMediatrPipeline<,>),
-                typeof(LogDNAMediatrPipeline<,>)
+                typeof(LogDNAMediatrPipeline<,>),
+                typeof(FluentValidationMediatrPipeline<,>)
             });
 
             container.Register(() => new ServiceFactory(container.GetInstance), Lifestyle.Singleton);
