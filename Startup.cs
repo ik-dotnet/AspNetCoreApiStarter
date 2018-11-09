@@ -108,6 +108,7 @@ namespace CodeStresmAspNetCoreApiStarter
 
         private void UseSimpleInjector(IApplicationBuilder app)
         {
+            container.RegisterMvcControllers(app);
             container.RegisterPackages(AppDomain.CurrentDomain.GetAssemblies());
 
             // Allow Simple Injector to resolve services from ASP.NET Core.
