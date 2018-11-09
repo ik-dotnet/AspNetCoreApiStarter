@@ -100,7 +100,14 @@ namespace CodeStresmAspNetCoreApiStarter
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
             services.AddSingleton(Configuration);
 
-            services.AddDbContext<EFContext>(opts => opts.UseSqlServer(AppSettings.PrimaryConnectionString));
+            //Ref: https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-resilient-entity-framework-core-sql-connections
+            services.AddDbContext<EFContext>(opts =>
+                opts.UseSqlServer(AppSettings.PrimaryConnectionString,
+                sqlServerOptionsAction:  optsAction =>
+                {
+                    optsAction.EnableRetryOnFailure(maxRetryCount: 3, maxRetryDelay: TimeSpan.FromSeconds(20), errorNumbersToAdd: null);
+                })
+            );
 
             services.EnableSimpleInjectorCrossWiring(container);
             services.UseSimpleInjectorAspNetRequestScoping(container);
