@@ -40,7 +40,7 @@ namespace CodeStresmAspNetCoreApiStarter
 
             services.AddCors();
             services.AddAutoMapper(thisAssembly);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             AddSimpleInjector(services);
 
